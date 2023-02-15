@@ -41,8 +41,13 @@ const PlacesPage = () => {
               to={"/account/places/" + place._id}
               className="bg-gray-100 cursor-pointer flex gap-4 p-4 rounded-xl shrink-0 grow"
             >
-              <div className="w-32 h-32 bg-gray-300">
-                {place.photos.length > 0 && <img src={place.photos[0]}></img>}
+              <div className="flex w-32 h-32 bg-gray-300">
+                {place.photos.length > 0 && (
+                  <img
+                    className="object-cover"
+                    src={"http://localhost:4000/uploads/" + place.photos[0]}
+                  ></img>
+                )}
               </div>
               <div className="grow-0 shrink">
                 <h2 className="text-xl font-semibold">{place.title}</h2>

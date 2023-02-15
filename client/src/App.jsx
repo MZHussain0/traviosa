@@ -23,10 +23,7 @@ function App() {
             <Route path={"/account/"} element={<ProfilePage />} />
             <Route path={"/account/places"} element={<PlacesPage />} />
             <Route path={"/account/places/new"} element={<PlacesFormPage />} />
-            {/* <Route
-              path={"/account/:subpage/:action"}
-              element={<AccountPage />}
-            /> */}
+            <Route path={"/account/places/:id"} element={<PlacesFormPage />} />
           </Route>
         </Routes>
       </BrowserRouter>

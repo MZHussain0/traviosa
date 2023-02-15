@@ -1,11 +1,12 @@
 import axios from "axios";
-import React, { useState } from "react";
-import { Navigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Navigate, useParams } from "react-router-dom";
 import AccountNav from "../components/AccountNav";
 import Perks from "../components/Perks";
 import PhotosUploader from "../components/PhotosUploader";
 
 const PlacesFormPage = () => {
+  const { id } = useParams();
   const [title, setTitle] = useState("");
   const [address, setAddress] = useState("");
   const [description, setDescription] = useState("");
@@ -17,6 +18,23 @@ const PlacesFormPage = () => {
   const [maxGuest, setMaxGuest] = useState(1);
   const [redirect, setRedirect] = useState(false);
 
+  useEffect(() => {
+    if (!id) {
+      return;
+    }
+    axios.get("/places/" + id).then(({ data }) => {
+      setTitle(data.title);
+      setAddress(data.address);
+      setDescription(data.description);
+      setAddedPhotos(data.photos);
+      setPerks(data.perks);
+      setExtraInfo(data.extraInfo);
+      setCheckIn(data.checkIn);
+      setCheckOut(data.checkOut);
+      setMaxGuest(data.maxGuests);
+    });
+  }, [id]);
+
   const inputHeaderDescription = (header, description) => {
     return (
       <>
@@ -26,9 +44,9 @@ const PlacesFormPage = () => {
     );
   };
 
-  const addNewPlace = async (e) => {
+  const savePlace = async (e) => {
     e.preventDefault();
-    await axios.post("/places", {
+    const placeData = {
       title,
       address,
       description,
@@ -38,8 +56,17 @@ const PlacesFormPage = () => {
       checkIn,
       checkOut,
       maxGuest,
-    });
-    setRedirect(true);
+    };
+
+    if (id) {
+      //update existing
+      await axios.put("/places", { id, ...placeData });
+      setRedirect(true);
+    } else {
+      // new place
+      await axios.post("/places", placeData);
+      setRedirect(true);
+    }
   };
 
   if (redirect) {
@@ -49,7 +76,7 @@ const PlacesFormPage = () => {
   return (
     <div>
       <AccountNav />
-      <form onSubmit={addNewPlace}>
+      <form onSubmit={savePlace}>
         <div>
           {inputHeaderDescription("Title", "Title should be short and catchy")}
           <input

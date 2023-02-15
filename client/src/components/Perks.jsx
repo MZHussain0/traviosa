@@ -15,7 +15,12 @@ const Perks = ({ selected, onChange }) => {
         className="border p-4 flex rounded-2xl gap-2
               items-center cursor-pointer"
       >
-        <input type="checkbox" name="wifi" onChange={handleCbClick} />
+        <input
+          type="checkbox"
+          checked={selected.includes("wifi")}
+          name="wifi"
+          onChange={handleCbClick}
+        />
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
@@ -37,7 +42,12 @@ const Perks = ({ selected, onChange }) => {
         className="border p-4 flex rounded-2xl gap-2
               items-center cursor-pointer"
       >
-        <input type="checkbox" name="tv" onChange={handleCbClick} />
+        <input
+          type="checkbox"
+          checked={selected.includes("tv")}
+          name="tv"
+          onChange={handleCbClick}
+        />
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
@@ -59,7 +69,12 @@ const Perks = ({ selected, onChange }) => {
         className="border p-4 flex rounded-2xl gap-2
               items-center cursor-pointer"
       >
-        <input type="checkbox" name="breakfast" onChange={handleCbClick} />
+        <input
+          type="checkbox"
+          checked={selected.includes("breakfast")}
+          name="breakfast"
+          onChange={handleCbClick}
+        />
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
@@ -81,7 +96,12 @@ const Perks = ({ selected, onChange }) => {
         className="border p-4 flex rounded-2xl gap-2
               items-center cursor-pointer"
       >
-        <input type="checkbox" name="bar" onChange={handleCbClick} />
+        <input
+          type="checkbox"
+          checked={selected.includes("bar")}
+          name="bar"
+          onChange={handleCbClick}
+        />
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
@@ -103,7 +123,12 @@ const Perks = ({ selected, onChange }) => {
         className="border p-4 flex rounded-2xl gap-2
               items-center cursor-pointer"
       >
-        <input type="checkbox" name="toiletries" onChange={handleCbClick} />
+        <input
+          type="checkbox"
+          checked={selected.includes("toiletries")}
+          name="toiletries"
+          onChange={handleCbClick}
+        />
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"

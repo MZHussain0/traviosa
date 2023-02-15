@@ -154,4 +154,52 @@ app.get("/places", async (req, res) => {
   });
 });
 
+// ----- GET ONE PLACE ----- //
+app.get("/places/:id", async (req, res) => {
+  const { token } = req.cookies;
+  jwt.verify(token, process.env.SECRET_KEY, {}, async (err, userData) => {
+    if (err) throw err;
+    const place = await Place.findById(req.params.id);
+    res.json(place);
+  });
+});
+
+// ----- UPDATE PLACE ----- //
+app.put("/places", async (req, res) => {
+  const { token } = req.cookies;
+  const {
+    id,
+    address,
+    addedPhotos,
+    description,
+    perks,
+    extraInfo,
+    checkIn,
+    checkOut,
+    maxGuest,
+    title,
+  } = req.body;
+
+  jwt.verify(token, process.env.SECRET_KEY, {}, async (err, userData) => {
+    if (err) throw err;
+    const placeDoc = await Place.findById(id);
+    if (userData.id === placeDoc.owner.toString()) {
+      placeDoc.set({
+        owner: userData.id,
+        title,
+        address,
+        photos: addedPhotos,
+        description,
+        perks,
+        extraInfo,
+        checkIn,
+        checkOut,
+        maxGuests: maxGuest,
+      });
+      await placeDoc.save();
+      res.json("ok");
+    }
+  });
+});
+
 app.listen(4000, () => console.log("server running..."));
