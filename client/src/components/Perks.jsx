@@ -1,13 +1,21 @@
 import React from "react";
 
 const Perks = ({ selected, onChange }) => {
+  const handleCbClick = (e) => {
+    const { checked, name } = e.target;
+    if (checked) {
+      onChange([...selected, name]);
+    } else {
+      onChange(selected.filter((item) => item !== name));
+    }
+  };
   return (
     <div className="mt-2 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-2">
       <label
         className="border p-4 flex rounded-2xl gap-2
               items-center cursor-pointer"
       >
-        <input type="checkbox" />
+        <input type="checkbox" name="wifi" onChange={handleCbClick} />
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
@@ -29,7 +37,7 @@ const Perks = ({ selected, onChange }) => {
         className="border p-4 flex rounded-2xl gap-2
               items-center cursor-pointer"
       >
-        <input type="checkbox" />
+        <input type="checkbox" name="tv" onChange={handleCbClick} />
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
@@ -51,7 +59,7 @@ const Perks = ({ selected, onChange }) => {
         className="border p-4 flex rounded-2xl gap-2
               items-center cursor-pointer"
       >
-        <input type="checkbox" />
+        <input type="checkbox" name="breakfast" onChange={handleCbClick} />
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
@@ -73,7 +81,7 @@ const Perks = ({ selected, onChange }) => {
         className="border p-4 flex rounded-2xl gap-2
               items-center cursor-pointer"
       >
-        <input type="checkbox" />
+        <input type="checkbox" name="bar" onChange={handleCbClick} />
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
@@ -95,7 +103,7 @@ const Perks = ({ selected, onChange }) => {
         className="border p-4 flex rounded-2xl gap-2
               items-center cursor-pointer"
       >
-        <input type="checkbox" />
+        <input type="checkbox" name="toiletries" onChange={handleCbClick} />
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
