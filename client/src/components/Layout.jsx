@@ -4,8 +4,9 @@ import { Outlet } from "react-router-dom";
 
 const Layout = () => {
   return (
-    <div className="p-4">
+    <div className="py-4 max-w-6xl mx-auto">
       <Header />
+      <div className=" border-b border-1 border-gray-500 mt-4"></div>
       <Outlet />
     </div>
   );

@@ -14,7 +14,7 @@ const AccountNav = () => {
     if (type === subpage) {
       classes += " bg-primary text-white";
     } else {
-      classes += " bg-gray-200";
+      classes += " bg-gray-200 hover:bg-gray-300 duration-100";
     }
     return classes;
   };

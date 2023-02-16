@@ -124,6 +124,7 @@ app.post("/places", (req, res) => {
     checkOut,
     maxGuest,
     title,
+    price,
   } = req.body;
 
   jwt.verify(token, process.env.SECRET_KEY, {}, async (err, userData) => {
@@ -139,13 +140,14 @@ app.post("/places", (req, res) => {
       checkIn,
       checkOut,
       maxGuests: maxGuest,
+      price,
     });
     res.json(placeDoc);
   });
 });
 
-// ----- GET ALL PLACES ----- //
-app.get("/places", async (req, res) => {
+// ----- GET USER created PLACES ----- //
+app.get("/user-places", async (req, res) => {
   const { token } = req.cookies;
   jwt.verify(token, process.env.SECRET_KEY, {}, async (err, userData) => {
     if (err) throw err;
@@ -178,6 +180,7 @@ app.put("/places", async (req, res) => {
     checkOut,
     maxGuest,
     title,
+    price,
   } = req.body;
 
   jwt.verify(token, process.env.SECRET_KEY, {}, async (err, userData) => {
@@ -195,11 +198,18 @@ app.put("/places", async (req, res) => {
         checkIn,
         checkOut,
         maxGuests: maxGuest,
+        price,
       });
       await placeDoc.save();
       res.json("ok");
     }
   });
+});
+
+// ----- GET ALL PLACES FROM DATABASE ----- //
+app.get("/places", async (req, res) => {
+  const places = await Place.find();
+  res.json(places);
 });
 
 app.listen(4000, () => console.log("server running..."));

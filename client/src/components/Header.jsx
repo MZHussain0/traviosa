@@ -26,9 +26,9 @@ const Header = () => {
 
       <div className="flex items-center gap-2 border border-gray-300 rounded-full py-2 px-4 font-semibold shadow-md shadow-gray-300 ">
         <div>Anywhere</div>
-        <div className="border border-l border-gray-300"></div>
+        <div className="border border-l h-8 border-gray-300"></div>
         <div>Any week</div>
-        <div className="border border-l border-gray-300"></div>
+        <div className="border border-l h-8 border-gray-300"></div>
         <div>Add guests</div>
         <button className="bg-primary text-white rounded-full p-2">
           <svg
