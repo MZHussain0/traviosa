@@ -7,6 +7,7 @@ const jwt = require("jsonwebtoken");
 const cookie = require("cookie-parser");
 const User = require("./models/User");
 const Place = require("./models/Place");
+const Booking = require("./models/Booking");
 const cookieParser = require("cookie-parser");
 const imageDownloader = require("image-downloader");
 const multer = require("multer");
@@ -158,12 +159,8 @@ app.get("/user-places", async (req, res) => {
 
 // ----- GET ONE PLACE ----- //
 app.get("/places/:id", async (req, res) => {
-  const { token } = req.cookies;
-  jwt.verify(token, process.env.SECRET_KEY, {}, async (err, userData) => {
-    if (err) throw err;
-    const place = await Place.findById(req.params.id);
-    res.json(place);
-  });
+  const place = await Place.findById(req.params.id);
+  res.json(place);
 });
 
 // ----- UPDATE PLACE ----- //
@@ -210,6 +207,27 @@ app.put("/places", async (req, res) => {
 app.get("/places", async (req, res) => {
   const places = await Place.find();
   res.json(places);
+});
+
+// ---- CREATE BOOKINGS ----- //
+app.post("/bookings", async (req, res) => {
+  const { place, checkIn, checkOut, numberOfGuests, name, phone, price } =
+    req.body;
+
+  try {
+    const bookingDoc = await Booking.create({
+      place,
+      checkIn,
+      checkOut,
+      numberOfGuests,
+      name,
+      phone,
+      price,
+    });
+    res.json(bookingDoc);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
 });
 
 app.listen(4000, () => console.log("server running..."));
