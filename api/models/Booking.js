@@ -1,9 +1,14 @@
 const mongoose = require("mongoose");
+const Place = require("./Place");
 
 const bookingModel = new mongoose.Schema({
   place: {
     type: mongoose.Schema.Types.ObjectId,
-    // ref: "Place",
+    ref: Place,
+    required: true,
+  },
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
     required: true,
   },
   checkIn: {

@@ -213,8 +213,9 @@ app.get("/places", async (req, res) => {
 app.post("/bookings", async (req, res) => {
   const { place, checkIn, checkOut, numberOfGuests, name, phone, price } =
     req.body;
-
-  try {
+  const { token } = req.cookies;
+  jwt.verify(token, process.env.SECRET_KEY, {}, async (err, userData) => {
+    if (err) throw err;
     const bookingDoc = await Booking.create({
       place,
       checkIn,
@@ -223,11 +224,20 @@ app.post("/bookings", async (req, res) => {
       name,
       phone,
       price,
+      user: userData.id,
     });
     res.json(bookingDoc);
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
+  });
+});
+
+// ----- GET ALL BOOKINGS FROM DATABASE ----- //
+app.get("/bookings", async (req, res) => {
+  const { token } = req.cookies;
+  jwt.verify(token, process.env.SECRET_KEY, {}, async (err, userData) => {
+    if (err) throw err;
+    const user = await Booking.find({ user: userData.id }).populate("place");
+    res.json(user);
+  });
 });
 
 app.listen(4000, () => console.log("server running..."));
