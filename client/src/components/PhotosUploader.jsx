@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useState } from "react";
+import Images from "./Images";
 
 const PhotosUploader = ({ addedPhotos, onChange }) => {
   const [photoLink, setPhotoLink] = useState("");
@@ -54,8 +55,7 @@ const PhotosUploader = ({ addedPhotos, onChange }) => {
         />
         <button
           className="bg-gray-200 px-4 rounded-2xl"
-          onClick={addPhotoByLink}
-        >
+          onClick={addPhotoByLink}>
           Add&nbsp;Photo
         </button>
       </div>
@@ -63,23 +63,21 @@ const PhotosUploader = ({ addedPhotos, onChange }) => {
         {addedPhotos.length > 0 &&
           addedPhotos.map((link) => (
             <div key={link} className="h-32 flex relative">
-              <img
-                src={"http://localhost:4000/uploads/" + link}
+              <Images
+                src={link}
                 alt=""
                 className="rounded-xl w-full object-cover"
               />
               <button
                 onClick={(e) => removePhoto(e, link)}
-                className="cursor-pointer absolute bg-gray-100 bg-opacity-50 text-red-600 p-1 shadow-sm shadow-black bottom-2 right-2 hover:bg-gray-300 rounded-lg"
-              >
+                className="cursor-pointer absolute bg-gray-100 bg-opacity-50 text-red-600 p-1 shadow-sm shadow-black bottom-2 right-2 hover:bg-gray-300 rounded-lg">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
                   viewBox="0 0 24 24"
                   strokeWidth={1.5}
                   stroke="currentColor"
-                  className="w-4 h-4"
-                >
+                  className="w-4 h-4">
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -90,15 +88,13 @@ const PhotosUploader = ({ addedPhotos, onChange }) => {
 
               <button
                 onClick={(e) => selectAsMainPhoto(e, link)}
-                className="cursor-pointer absolute bg-gray-100 bg-opacity-50 text-blue-800 p-1 shadow-sm shadow-black bottom-2 left-2 hover:bg-gray-300 rounded-lg"
-              >
+                className="cursor-pointer absolute bg-gray-100 bg-opacity-50 text-blue-800 p-1 shadow-sm shadow-black bottom-2 left-2 hover:bg-gray-300 rounded-lg">
                 {link === addedPhotos[0] && (
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 24 24"
                     fill="currentColor"
-                    className="w-6 h-6"
-                  >
+                    className="w-6 h-6">
                     <path
                       fillRule="evenodd"
                       d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z"
@@ -114,8 +110,7 @@ const PhotosUploader = ({ addedPhotos, onChange }) => {
                     viewBox="0 0 24 24"
                     strokeWidth={1.5}
                     stroke="currentColor"
-                    className="w-6 h-6"
-                  >
+                    className="w-6 h-6">
                     <path
                       strokeLinecap="round"
                       strokeLinejoin="round"
@@ -139,8 +134,7 @@ const PhotosUploader = ({ addedPhotos, onChange }) => {
             viewBox="0 0 24 24"
             strokeWidth={1.5}
             stroke="currentColor"
-            className="w-8 h-8"
-          >
+            className="w-8 h-8">
             <path
               strokeLinecap="round"
               strokeLinejoin="round"
